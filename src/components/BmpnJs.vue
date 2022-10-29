@@ -14,7 +14,7 @@
   import propertiesPanelModule from "bpmn-js-properties-panel";
   import camundaModdleDescriptor from "camunda-bpmn-moddle/resources/camunda";
   import propertiesProviderModule from 'houtaroy-bpmn-js-properties-panel-activiti/lib/provider/activiti';
-  //import customTranslate from "../js/customTranslate/customTranslate";
+  import customTranslate from "../customTranslate/customTranslate";
 
   export default {
     name: "BmpnJs.vue",
@@ -47,6 +47,9 @@
         // 获取画布 element
         this.canvas = this.$refs.canvas;
 
+        var customTranslateModule = {
+          translate: [ 'value', customTranslate ]
+        };
         // 创建Bpmn对象
         this.bpmnModeler = new BpmnModeler({
           // 设置bpmn的绘图容器为上门获取的画布 element
@@ -56,7 +59,7 @@
           propertiesPanel: {
             parent: "#js-properties-panel"
           },
-          additionalModules: [propertiesProviderModule, propertiesPanelModule],
+          additionalModules: [propertiesProviderModule, propertiesPanelModule, customTranslateModule],
           moddleExtensions: {
             camunda: camundaModdleDescriptor
           }
